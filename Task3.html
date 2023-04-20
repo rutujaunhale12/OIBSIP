@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Temperature Convertor</title>
+</head>
+<body>
+	<div class="heading">
+		<h1>TempCalculation.com</h1>
+	<h2>From Celsius to Fahrenheit and Kelvin, we've got you covered!</h2>
+	</div>
+	
+	<div class="container">
+		<!-- Celsius  -->
+		<div id="celsius">
+			<input type="number" name="" placeholder="Enter temperature in Celsius">
+			<span class="icon">&#8451</span>
+		</div>
+		<!-- Fahrenheit  -->
+		<div id="fahrenheit">
+			<input type="number" name="" placeholder="Enter temperature in Celsius">
+			<span class="icon">&#8457</span>
+		</div>
+		<!-- Kelvin  -->
+		<div id="kelvin">
+			<input type="number" name="" placeholder="Enter temperature in Celsius">
+			<span class="icon">&#8490</span>
+		</div>
+
+		<div class="button">
+			<button id="clearbtn">Clear</button>
+			<button id="calculatebtn">Calculate</button>
+		</div>
+
+	</div>
+
+	<style>
+		*{
+	margin: auto;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+.heading h1{
+	display: flex;
+	margin-top: 2px;
+	text-align: center;
+	justify-content: center;
+	background-color: #758fb8;
+}
+.heading h2{
+	display: flex;
+	margin-top: 5%;
+	text-align: center;
+	justify-content: center;
+	background-color: hwb(204 65% 33%);
+	margin-left: 150px;
+	margin-right: 150px;
+}
+
+.container{
+	max-width: 450px;
+	background: #758fb8;
+	box-shadow: 0px 0px 15px 3px black;
+	font-family: sans-serif;
+	padding: 20px;
+	margin-top: 5%;
+}
+
+#celsius, #fahrenheit, #kelvin{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 25px
+}
+
+input{
+	flex: 5;
+	height: 60px;
+	font-size: 20px;
+	font-weight: 600;
+	text-align: center;
+	border: none;
+	outline: none;
+	border-radius: 8px 0 0 8px;
+	padding: 0 10px;
+}
+
+.icon{
+	flex: 1;
+	height: 60px;
+	line-height: 60px;
+	padding: 0 5px;
+	text-align: center;
+	font-size: 30px;
+	background: #4d5964;
+	color: #fff;
+	border-radius: 0 8px 8px 0;
+}
+
+.button{
+	margin-top: 35px;
+	text-align: center;
+}
+
+.button #clearbtn, #calculatebtn{
+	border: none;
+	outline: none;
+	padding: 10px 30px;
+	font-size: 20px;
+	font-weight: 600;
+	border-radius: 3px;
+	cursor: pointer;
+	transition: 0.3s;
+}
+
+.button #clearbtn:hover, #calculatebtn:hover{
+	background-color: black;
+	color: white;
+}
+</style>
+
+<script>
+	let celsiusInput = document.querySelector('#celsius > input')
+    let fahrenheitInput = document.querySelector('#fahrenheit > input')
+    let kelvinInput = document.querySelector('#kelvin > input')
+
+let clearbtn = document.querySelector('#clearbtn')
+let calculatebtn = document.querySelector('#calculatebtn')
+
+function roundNumber(number){
+    return Math.round(number*100)/100
+}
+
+// Clear all inputs when the Clear button is clicked
+clearbtn.addEventListener('click', function() {
+    celsiusInput.value = ''
+    fahrenheitInput.value = ''
+    kelvinInput.value = ''
+})
+
+// Convert temperatures when the Calculate button is clicked
+calculatebtn.addEventListener('click', function() {
+    // Convert from Celsius
+    if (celsiusInput.value !== '') {
+        let cTemp = parseFloat(celsiusInput.value)
+        let fTemp = (cTemp*(9/5)) + 32
+        let kTemp = cTemp + 273.15
+
+        fahrenheitInput.value = roundNumber(fTemp)
+        kelvinInput.value = roundNumber(kTemp)
+    }
+
+     // Convert from Fahrenheit
+     if (fahrenheitInput.value !== '') {
+        let fTemp = parseFloat(fahrenheitInput.value)
+        let cTemp = (fTemp-32) * (5/9)
+        let kTemp = (fTemp-32) *(5/9) + 273.15
+
+        celsiusInput.value = roundNumber(cTemp)
+        kelvinInput.value = roundNumber(kTemp)
+    }
+
+    // Convert from Kelvin
+    if (kelvinInput.value !== '') {
+        let kTemp = parseFloat(kelvinInput.value)
+        let cTemp = kTemp - 273.15
+        let fTemp = (kTemp - 273.15) * (9/5) + 32
+
+        celsiusInput.value = roundNumber(cTemp)
+        fahrenheitInput.value = roundNumber(fTemp)
+    }
+})
+	</script>
+
+
+</body>
+</html>
